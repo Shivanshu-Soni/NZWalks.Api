@@ -16,7 +16,6 @@ f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.AssemblyInfo.
 f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.csproj.CoreCompileInputs.cache
 f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.MvcApplicationPartsAssemblyInfo.cs
 f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.MvcApplicationPartsAssemblyInfo.cache
-f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.sourcelink.json
 f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\staticwebassets.build.json
 f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\staticwebassets.development.json
 f:\DOTNET\API\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\staticwebassets\msbuild.NZWalks.Api.Microsoft.AspNetCore.StaticWebAssets.props

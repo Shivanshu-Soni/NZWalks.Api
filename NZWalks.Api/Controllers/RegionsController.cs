@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NZWalks.Api.Data;
 using NZWalks.Api.Models.DomainModels;
 using NZWalks.Api.Models.DTO;
+using NZWalks.Api.Repository;
 
 namespace NZWalks.Api.Controllers
 {
@@ -16,9 +17,12 @@ namespace NZWalks.Api.Controllers
     public class RegionsController : ControllerBase
     {
         public NZWalksDbContext _dbContext;
-        public RegionsController(NZWalksDbContext dbContext)
+        private readonly IRegionRepository regionRepository;
+
+        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository)
         {
-            _dbContext = dbContext;
+            this.regionRepository = regionRepository;
+            this._dbContext = dbContext;
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -31,7 +35,7 @@ namespace NZWalks.Api.Controllers
             //     RegionImageUrl="https://www.istockphoto.com/photo/2018-jan-3-auckland-new-zealand-panorama-view-beautiful-landcape-of-the-building-in-gm1060826424-283569015"}
             // };
 
-            var regions = await _dbContext.regions.ToListAsync();
+            var regions = await regionRepository.GetAllAsync();
 
             //Map domain model to DTO
             var regionDto = new List<RegionDto>();
