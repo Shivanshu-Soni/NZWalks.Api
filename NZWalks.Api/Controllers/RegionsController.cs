@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NZWalks.Api.CustomActionFilters;
 using NZWalks.Api.Data;
 using NZWalks.Api.Models.DomainModels;
 using NZWalks.Api.Models.DTO;
@@ -90,9 +91,10 @@ namespace NZWalks.Api.Controllers
 
         //POST: To create new record
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> CreateRegion([FromBody] AddRegionRequestDto addRegionDto)
         {
-            if(ModelState.IsValid){
+          
                 var regionDomainModel = mapper.Map<Region>(addRegionDto);
 
             // use dbcontext to create record
@@ -111,20 +113,19 @@ namespace NZWalks.Api.Controllers
 
 
             return CreatedAtAction(nameof(GetRegionById), new { id = regionDomainModel.Id }, regionDto);
-            }
+            
 
-            return BadRequest(ModelState);
+          
             
 
         }
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [ValidateModel]
         public async Task<IActionResult> updateRegion([FromRoute] Guid Id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
-            if(ModelState.IsValid){
-                
-            }
+            
 
             var regionDomainModel = new Region
             {
