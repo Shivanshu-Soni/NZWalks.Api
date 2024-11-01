@@ -51,5 +51,51 @@ namespace NZWalks.Api.Controllers
             return Ok(walksDTO);
         }
 
+        //Get walk by id
+        // Get : /api/walk/{id}
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var walkDomainModel = await walkRepository.GetByIdAsync(id);
+            if (walkDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            //map domain to dto
+            return Ok(mapper.Map<WalksDTO>(walkDomainModel));
+        }
+
+        //update walk by id
+        //PUT : /api/walks/{id}
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateById([FromRoute] Guid id, UpdateWalkRequiestDto updateWalkRequiestDto)
+        {
+            var walkDomain = mapper.Map<Walk>(updateWalkRequiestDto);
+            walkDomain = await walkRepository.UpdateAsync(id, walkDomain);
+            if (walkDomain == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<WalksDTO>(walkDomain));
+        }
+
+        // delete walk by id
+        // Delete : /api/walks/{id}
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteById([FromRoute] Guid id)
+        {
+            var deletedwalkDomainModel = await walkRepository.DeleteAsync(id);
+            if (deletedwalkDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<WalksDTO>(deletedwalkDomainModel));
+        }
     }
 }
