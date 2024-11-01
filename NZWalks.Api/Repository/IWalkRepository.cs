@@ -7,8 +7,9 @@ using NZWalks.Api.Models.DomainModels;
 namespace NZWalks.Api.Repository
 {
     public interface IWalkRepository
-    {   
+    {
         Task<Walk> CreateAsync(Walk walk);
-        
+        Task<List<Walk>>GetAllAsync();
+
     }
 }

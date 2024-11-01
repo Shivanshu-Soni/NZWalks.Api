@@ -15,13 +15,20 @@ namespace NZWalks.Api.Repository
         public SQLWalkRepository(NZWalksDbContext dbContext)
         {
             this.dbContext = dbContext;
-            
+
         }
         public async Task<Walk> CreateAsync(Walk walk)
         {
             await dbContext.walks.AddAsync(walk);
             await dbContext.SaveChangesAsync();
             return walk;
+        }
+
+        public async Task<List<Walk>> GetAllAsync()
+        {
+            return await dbContext.walks.Include("difficulty").Include("region").ToListAsync();
+
+
         }
     }
 }

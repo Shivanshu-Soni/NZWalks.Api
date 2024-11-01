@@ -14,15 +14,15 @@ namespace NZWalks.Api.Mappings
         {
             //inside ctor we create mapping
 
-            CreateMap<Region,RegionDto>().ReverseMap();
+            CreateMap<Region, RegionDto>().ReverseMap();
             CreateMap<RegionDto, Region>().ReverseMap();
 
-            CreateMap<AddWalksRequestDto,Walk>().ReverseMap();
+            CreateMap<AddWalksRequestDto, Walk>().ReverseMap();
             CreateMap<Walk, WalksDTO>().ReverseMap();
-            
-            
+            CreateMap<Difficulty, DifficultyDTO>();
+
         }
     }
 
-   
+
 }
