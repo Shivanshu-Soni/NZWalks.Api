@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -27,13 +28,20 @@ namespace NZWalks.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddWalksRequestDto addWalksRequestDto)
         {
-            //map DTO(AddWalkRequestDto) to domainModel(Walk)
-            var walkDomainModel = mapper.Map<Walk>(addWalksRequestDto);
-            await walkRepository.CreateAsync(walkDomainModel);
+            if (ModelState.IsValid)
+            {
+                //map DTO(AddWalkRequestDto) to domainModel(Walk)
+                var walkDomainModel = mapper.Map<Walk>(addWalksRequestDto);
+                await walkRepository.CreateAsync(walkDomainModel);
 
 
-            //map domain model to dto
-            return Ok(mapper.Map<WalksDTO>(walkDomainModel));
+                //map domain model to dto
+                return Ok(mapper.Map<WalksDTO>(walkDomainModel));
+            }
+
+            return BadRequest(ModelState);
+
+
 
         }
 
@@ -73,14 +81,20 @@ namespace NZWalks.Api.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateById([FromRoute] Guid id, UpdateWalkRequiestDto updateWalkRequiestDto)
         {
-            var walkDomain = mapper.Map<Walk>(updateWalkRequiestDto);
-            walkDomain = await walkRepository.UpdateAsync(id, walkDomain);
-            if (walkDomain == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                var walkDomain = mapper.Map<Walk>(updateWalkRequiestDto);
+                walkDomain = await walkRepository.UpdateAsync(id, walkDomain);
+                if (walkDomain == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(mapper.Map<WalksDTO>(walkDomain));
             }
 
-            return Ok(mapper.Map<WalksDTO>(walkDomain));
+            return BadRequest(ModelState);
+
         }
 
         // delete walk by id
