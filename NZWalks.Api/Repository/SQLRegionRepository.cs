@@ -22,15 +22,16 @@ namespace NZWalks.Api.Repository
         {
             await nZWalksDbContext.regions.AddAsync(region);
             await nZWalksDbContext.SaveChangesAsync();
+            return region;
 
 
-            throw new NotImplementedException();
         }
 
         public async Task<Region?> DeleteAsync(Guid id)
         {
-            var existingregion = await nZWalksDbContext.regions.FirstOrDefaultAsync(x => x.Id== id);
-            if (existingregion!=null){
+            var existingregion = await nZWalksDbContext.regions.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingregion != null)
+            {
                 return null;
             }
             nZWalksDbContext.Remove(existingregion);
