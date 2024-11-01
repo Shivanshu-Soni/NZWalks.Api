@@ -6,7 +6,7 @@ using NZWalks.Api.Models.DomainModels;
 
 namespace NZWalks.Api.Repository
 {
-    public class InMemmoryRegionRepository : IRegionRepository
+    public class InMemmoryRegionRepository
     {
         public async Task<List<Region>> GetAllAsync()
         {

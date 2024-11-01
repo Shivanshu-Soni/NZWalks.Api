@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MNSuD6mO19s=",
+  "dgSpecHash": "RM2etG79yzc=",
   "success": true,
-  "projectFilePath": "F:\\DOTNET\\API\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj",
+  "projectFilePath": "F:\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shiva\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\shiva\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
