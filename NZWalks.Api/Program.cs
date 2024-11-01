@@ -16,6 +16,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksConnectio
 
 //repository pattern //here we can inject any repo class
 builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
+builder.Services.AddScoped<IWalkRepository,SQLWalkRepository>();
 //Automapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 var app = builder.Build();

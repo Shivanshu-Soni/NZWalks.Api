@@ -16,16 +16,13 @@ namespace NZWalks.Api.Mappings
 
             CreateMap<Region,RegionDto>().ReverseMap();
             CreateMap<RegionDto, Region>().ReverseMap();
+
+            CreateMap<AddWalksRequestDto,Walk>().ReverseMap();
+            CreateMap<Walk, WalksDTO>().ReverseMap();
             
             
         }
     }
 
-    class UserDto{
-        public string Fullname { get; set;}
-
-    }
-    class UserDomain{
-        public string Fullname { get; set;}
-    }
+   
 }
