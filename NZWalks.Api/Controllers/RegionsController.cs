@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NZWalks.Api.Data;
@@ -19,8 +20,11 @@ namespace NZWalks.Api.Controllers
         public NZWalksDbContext _dbContext;
         private readonly IRegionRepository regionRepository;
 
-        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository)
+        public readonly IMapper mapper ;
+
+        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.regionRepository = regionRepository;
             this._dbContext = dbContext;
         }
@@ -38,21 +42,21 @@ namespace NZWalks.Api.Controllers
             var regions = await regionRepository.GetAllAsync();
 
             //Map domain model to DTO
-            var regionDto = new List<RegionDto>();
-            foreach (var region in regions)
-            {
-                regionDto.Add(new RegionDto()
-                {
-                    Id = region.Id,
-                    Code = region.Code,
-                    Name = region.Name,
-                    RegionImageUrl = region.RegionImageUrl,
-                });
-            }
-
-
+            // var regionDto = new List<RegionDto>();
+            // foreach (var region in regions)
+            // {
+            //     regionDto.Add(new RegionDto()
+            //     {
+            //         Id = region.Id,
+            //         Code = region.Code,
+            //         Name = region.Name,
+            //         RegionImageUrl = region.RegionImageUrl,
+            //     });
+            // }
+            // using autommaper to bind domainmodel and dto
+          var regionsdto =  mapper.Map<List<RegionDto>>(regions);
             // return dto
-            return Ok(regionDto);
+            return Ok(regionsdto);
         }
 
         // get single region
@@ -70,13 +74,15 @@ namespace NZWalks.Api.Controllers
             }
 
             // map regiondomain model to region to dto
-            var regionDto = new RegionDto
-            {
-                Id = region.Id,
-                Code = region.Code,
-                Name = region.Name,
-                RegionImageUrl = region.RegionImageUrl,
-            };
+            // var regionDto = new RegionDto
+            // {
+            //     Id = region.Id,
+            //     Code = region.Code,
+            //     Name = region.Name,
+            //     RegionImageUrl = region.RegionImageUrl,
+            // };
+
+            var regionDto = mapper.Map<RegionDto>(region);
             return Ok(regionDto);
 
         }
@@ -85,25 +91,22 @@ namespace NZWalks.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRegion([FromBody] RegionDto addRegionDto)
         {
-            var regionDomainModel = new Region
-            {
-                //Id = regionDto.Id,
-                Code = addRegionDto.Code,
-                Name = addRegionDto.Name,
-                RegionImageUrl = addRegionDto.RegionImageUrl,
-            };
+            var regionDomainModel = mapper.Map<Region>(addRegionDto);
 
             // use dbcontext to create record
             await  regionRepository.CreateAsync(regionDomainModel);
             await _dbContext.SaveChangesAsync();
 
-            var regionDto = new RegionDto
-            {
-                Id = regionDomainModel.Id,
-                Code = regionDomainModel.Code,
-                Name = regionDomainModel.Name,
-                RegionImageUrl = regionDomainModel.RegionImageUrl,
-            };
+            // var regionDto = new RegionDto
+            // {
+            //     Id = regionDomainModel.Id,
+            //     Code = regionDomainModel.Code,
+            //     Name = regionDomainModel.Name,
+            //     RegionImageUrl = regionDomainModel.RegionImageUrl,
+            // };
+            // using automapper to map region to regiondto 
+           var regionDto =  mapper.Map<RegionDto>(regionDomainModel);
+           
 
             return CreatedAtAction(nameof(GetRegionById), new { id = regionDomainModel.Id }, regionDto);
 

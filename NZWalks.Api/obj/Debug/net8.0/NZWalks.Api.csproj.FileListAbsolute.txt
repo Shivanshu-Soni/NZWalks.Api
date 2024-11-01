@@ -283,3 +283,4 @@ F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\scopedcss\bundle\NZWalks.Api.styles.
 F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks..332F234C.Up2Date
 F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.genruntimeconfig.cache
 F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\ref\NZWalks.Api.dll
+F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\AutoMapper.dll
