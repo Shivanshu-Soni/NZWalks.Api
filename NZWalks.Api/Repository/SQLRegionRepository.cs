@@ -34,7 +34,7 @@ namespace NZWalks.Api.Repository
             {
                 return null;
             }
-            nZWalksDbContext.Remove(existingregion);
+             nZWalksDbContext.Remove(existingregion);
             await nZWalksDbContext.SaveChangesAsync();
             return existingregion;
         }
