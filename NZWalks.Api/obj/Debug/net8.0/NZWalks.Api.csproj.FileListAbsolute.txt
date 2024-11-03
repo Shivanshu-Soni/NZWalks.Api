@@ -284,3 +284,10 @@ F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks..332F234C.Up2Date
 F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.genruntimeconfig.cache
 F:\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\ref\NZWalks.Api.dll
 F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\AutoMapper.dll
+f:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+f:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
+F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+F:\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll

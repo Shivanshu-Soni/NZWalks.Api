@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
+
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.Filters;
 using NZWalks.Api.CustomActionFilters;
 using NZWalks.Api.Data;
 using NZWalks.Api.Models.DomainModels;
@@ -17,6 +13,7 @@ namespace NZWalks.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class RegionsController : ControllerBase
     {
         public NZWalksDbContext _dbContext;
