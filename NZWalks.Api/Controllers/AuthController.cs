@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using NZWalks.Api.Models.DTO;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Runtime.InteropServices;
+using NZWalks.Api.Repository;
 
 namespace NZWalks.Api.Controllers
 {
@@ -12,10 +14,12 @@ namespace NZWalks.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ITokenRepository tokenRepository;
 
-        public AuthController(UserManager<IdentityUser> userManager)
+        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
         {
             _userManager = userManager;
+            this.tokenRepository = tokenRepository;
         }
 
         // POST: /api/Auth/Register
@@ -43,6 +47,37 @@ namespace NZWalks.Api.Controllers
                 }
             }
             return BadRequest("Something went wrong");
+        }
+
+        //Post /api/auth/Login
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginRequestDTO)
+        {
+            var user = await _userManager.FindByEmailAsync(loginRequestDTO.UserName);
+            if (user != null)
+            {
+                var checkPasswordResult = await _userManager.CheckPasswordAsync(user, loginRequestDTO.Password);
+                if (checkPasswordResult)
+                {
+                    // get roles for this user
+                    var userRole = await _userManager.GetRolesAsync(user);
+                    if (userRole != null)
+                    {
+                        // create token
+                        var jwt = tokenRepository.createJWTToken(user, userRole.ToList());
+                        var response = new LoginResponseDto
+                        {
+                            JwtToken = jwt,
+                        };
+                        return Ok(response);
+                    }
+
+                    return Ok("");
+                }
+            }
+            return BadRequest("UserName or password incorrect");
+
         }
     }
 }
