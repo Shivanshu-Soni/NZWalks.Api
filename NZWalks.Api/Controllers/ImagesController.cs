@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NZWalks.Api.Models;
 using NZWalks.Api.Models.DTO;
+using NZWalks.Api.Repository;
 
 namespace NZWalks.Api.Controllers
 {
@@ -15,6 +16,12 @@ namespace NZWalks.Api.Controllers
 
     public class ImagesController : ControllerBase
     {
+        private readonly IImageRepository imageRepository;
+
+        public ImagesController(IImageRepository imageRepository)
+        {
+            this.imageRepository = imageRepository;
+        }
         //POST: /api/Images/Upload
         [HttpPost]
         [Route("Upload")]
@@ -35,7 +42,8 @@ namespace NZWalks.Api.Controllers
 
                 };
                     //user repository to upload file
-
+                    await imageRepository.Upload(ImageDomainModel);
+                    return Ok(ImageDomainModel);
             }
             return BadRequest(ModelState);
         }
