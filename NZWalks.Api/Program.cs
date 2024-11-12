@@ -8,10 +8,19 @@ using Microsoft.OpenApi.Models;
 using NZWalks.Api.Data;
 using NZWalks.Api.Mappings;
 using NZWalks.Api.Repository;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var logger = new LoggerConfiguration()
+.WriteTo.Console()
+.WriteTo.File("Logs/NZWalks_log.txt", rollingInterval: RollingInterval.Minute)
+                .MinimumLevel.Information()
+                .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog();
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();

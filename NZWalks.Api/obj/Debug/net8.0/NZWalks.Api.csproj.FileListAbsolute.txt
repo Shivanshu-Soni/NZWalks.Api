@@ -442,3 +442,12 @@ C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\refint\NZWalks.Api.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.pdb
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.genruntimeconfig.cache
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\ref\NZWalks.Api.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll

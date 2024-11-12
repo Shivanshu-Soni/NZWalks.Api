@@ -1,4 +1,5 @@
 
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,42 +22,40 @@ namespace NZWalks.Api.Controllers
 
         public readonly IMapper mapper;
 
-        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository, IMapper mapper)
+        public ILogger<RegionsController> logger { get; }
+
+        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository, IMapper mapper, ILogger<RegionsController> logger)
         {
             this.mapper = mapper;
+            this.logger = logger;
             this.regionRepository = regionRepository;
             this._dbContext = dbContext;
         }
         [HttpGet]
-        [Authorize(Roles = "Reader")]
+        // [Authorize(Roles = "Reader")]
+
         public async Task<IActionResult> GetAll()
         {
-            // var region = new List<Region>
-            // {
-            //     new Region {Id=Guid.NewGuid(),
-            //     Name= "Auckland region",
-            //     Code="AKL",
-            //     RegionImageUrl="https://www.istockphoto.com/photo/2018-jan-3-auckland-new-zealand-panorama-view-beautiful-landcape-of-the-building-in-gm1060826424-283569015"}
-            // };
+            //logger.LogInformation("get all regions actionMethod was invocked");
 
-            var regions = await regionRepository.GetAllAsync();
+            try
+            {
+                var regions = await regionRepository.GetAllAsync();
 
-            //Map domain model to DTO
-            // var regionDto = new List<RegionDto>();
-            // foreach (var region in regions)
-            // {
-            //     regionDto.Add(new RegionDto()
-            //     {
-            //         Id = region.Id,
-            //         Code = region.Code,
-            //         Name = region.Name,
-            //         RegionImageUrl = region.RegionImageUrl,
-            //     });
-            // }
-            // using autommaper to bind domainmodel and dto
-            var regionsdto = mapper.Map<List<RegionDto>>(regions);
-            // return dto
-            return Ok(regionsdto);
+
+                // using autommaper to bind domainmodel and dto
+                logger.LogInformation($"Finished get all region with data : {JsonSerializer.Serialize(regions)}");
+                var regionsdto = mapper.Map<List<RegionDto>>(regions);
+                // return dto
+                return Ok(regionsdto);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+                throw;
+            }
+
+
         }
 
         // get single region
