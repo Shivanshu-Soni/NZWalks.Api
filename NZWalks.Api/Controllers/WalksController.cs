@@ -58,6 +58,9 @@ namespace NZWalks.Api.Controllers
             // Map the domain models to DTOs
             var walksDTO = mapper.Map<List<WalksDTO>>(walksDomainModel);
 
+            // create a dummy exception to test middleware
+            throw new Exception("This is a Exception");
+
             // Return the mapped list as an HTTP 200 response
             return Ok(walksDTO);
         }
