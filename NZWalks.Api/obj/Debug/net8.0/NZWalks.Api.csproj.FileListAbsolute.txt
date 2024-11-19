@@ -451,3 +451,4 @@ c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Settings.Configura
 c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
+c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Versioning.dll

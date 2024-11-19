@@ -24,6 +24,7 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog();
 
 builder.Services.AddControllers();
+builder.Services.AddApiVersioning();
 builder.Services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
