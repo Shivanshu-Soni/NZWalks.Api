@@ -306,6 +306,7 @@ C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authe
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Versioning.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -339,6 +340,15 @@ C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -442,13 +452,3 @@ C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\refint\NZWalks.Api.dll
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.pdb
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\NZWalks.Api.genruntimeconfig.cache
 C:\Shivanshu\NZWalks.Api\NZWalks.Api\obj\Debug\net8.0\ref\NZWalks.Api.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
-c:\Shivanshu\NZWalks.Api\NZWalks.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Versioning.dll
