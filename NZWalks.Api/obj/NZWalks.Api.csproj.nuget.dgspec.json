@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj": {}
+    "C:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj": {}
   },
   "projects": {
-    "c:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj": {
+    "C:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj",
+        "projectUniqueName": "C:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj",
         "projectName": "NZWalks.Api",
-        "projectPath": "c:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj",
+        "projectPath": "C:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\NZWalks.Api.csproj",
         "packagesPath": "C:\\Users\\Nextworld\\.nuget\\packages\\",
-        "outputPath": "c:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\obj\\",
+        "outputPath": "C:\\Shivanshu\\NZWalks.Api\\NZWalks.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
