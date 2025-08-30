@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Ex7jXE/6mdk=",
+  "dgSpecHash": "H6p+e9JLGUI=",
   "success": true,
-  "projectFilePath": "C:\\Shivanshu\\NZWalks.Api\\NZWalks.UI\\NZWalks.UI.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "H:\\NZWalks.Api\\NZWalks.UI\\NZWalks.UI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.17\\microsoft.netcore.app.ref.8.0.17.nupkg.sha512",
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.17\\microsoft.windowsdesktop.app.ref.8.0.17.nupkg.sha512",
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.17\\microsoft.aspnetcore.app.ref.8.0.17.nupkg.sha512",
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.17\\microsoft.netcore.app.host.win-x64.8.0.17.nupkg.sha512"
+  ],
   "logs": []
 }
