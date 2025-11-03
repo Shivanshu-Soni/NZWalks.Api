@@ -15,22 +15,15 @@ namespace NZWalks.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    public class RegionsController : ControllerBase
+    public class RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository, IMapper mapper, ILogger<RegionsController> logger) : ControllerBase
     {
-        public NZWalksDbContext _dbContext;
-        private readonly IRegionRepository regionRepository;
+        public NZWalksDbContext _dbContext = dbContext;
+        private readonly IRegionRepository regionRepository = regionRepository;
 
-        public readonly IMapper mapper;
+        public readonly IMapper mapper = mapper;
 
-        public ILogger<RegionsController> logger { get; }
+        public ILogger<RegionsController> logger { get; } = logger;
 
-        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository, IMapper mapper, ILogger<RegionsController> logger)
-        {
-            this.mapper = mapper;
-            this.logger = logger;
-            this.regionRepository = regionRepository;
-            this._dbContext = dbContext;
-        }
         [HttpGet]
         // [Authorize(Roles = "Reader")]
 

@@ -11,14 +11,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace NZWalks.Api.Repository
 {
-    public class TokenRepository : ITokenRepository
+    public class TokenRepository(IConfiguration configuration) : ITokenRepository
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration configuration = configuration;
 
-        public TokenRepository(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
         public string createJWTToken(IdentityUser user, List<string> roles)
         {
             //create claims

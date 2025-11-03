@@ -10,14 +10,10 @@ using NZWalks.Api.Models.DomainModels;
 
 namespace NZWalks.Api.Repository
 {
-    public class SQLWalkRepository : IWalkRepository
+    public class SQLWalkRepository(NZWalksDbContext dbContext) : IWalkRepository
     {
-        private readonly NZWalksDbContext dbContext;
-        public SQLWalkRepository(NZWalksDbContext dbContext)
-        {
-            this.dbContext = dbContext;
+        private readonly NZWalksDbContext dbContext = dbContext;
 
-        }
         public async Task<Walk> CreateAsync(Walk walk)
         {
             await dbContext.walks.AddAsync(walk);

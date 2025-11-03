@@ -7,16 +7,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace NZWalks.Api.MiddleWare
 {
-    public class ExceptionHandlerMiddleware
+    public class ExceptionHandlerMiddleware(ILogger<ExceptionHandlerMiddleware> logger, RequestDelegate next)
     {
-        private readonly ILogger<ExceptionHandlerMiddleware> logger;
-        private readonly RequestDelegate next;
-
-        public ExceptionHandlerMiddleware(ILogger<ExceptionHandlerMiddleware> logger ,RequestDelegate next)
-        {
-            this.logger = logger;
-            this.next = next;
-        }
+        private readonly ILogger<ExceptionHandlerMiddleware> logger = logger;
+        private readonly RequestDelegate next = next;
 
         public async Task InvokeAsync(HttpContext context){
             

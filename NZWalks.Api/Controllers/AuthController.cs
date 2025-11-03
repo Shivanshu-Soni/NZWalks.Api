@@ -11,16 +11,10 @@ namespace NZWalks.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository) : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly ITokenRepository tokenRepository;
-
-        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
-        {
-            _userManager = userManager;
-            this.tokenRepository = tokenRepository;
-        }
+        private readonly UserManager<IdentityUser> _userManager = userManager;
+        private readonly ITokenRepository tokenRepository = tokenRepository;
 
         // POST: /api/Auth/Register
         [HttpPost]

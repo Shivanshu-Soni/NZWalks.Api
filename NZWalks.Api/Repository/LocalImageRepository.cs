@@ -8,18 +8,12 @@ using NZWalks.Api.Models;
 
 namespace NZWalks.Api.Repository
 {
-    public class LocalImageRepository : IImageRepository
+    public class LocalImageRepository(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor, NZWalksDbContext nZWalksDbContext) : IImageRepository
     {
-        private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly NZWalksDbContext nZWalksDbContext;
+        private readonly IWebHostEnvironment webHostEnvironment = webHostEnvironment;
+        private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
+        private readonly NZWalksDbContext nZWalksDbContext = nZWalksDbContext;
 
-        public LocalImageRepository(IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor, NZWalksDbContext nZWalksDbContext)
-        {
-            this.webHostEnvironment = webHostEnvironment;
-            this.httpContextAccessor = httpContextAccessor;
-            this.nZWalksDbContext = nZWalksDbContext;
-        }
         public async Task<Image> Upload(Image image)
         {
             var loacalFilePath = Path.Combine(webHostEnvironment.ContentRootPath, "Images",

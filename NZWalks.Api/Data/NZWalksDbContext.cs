@@ -8,13 +8,8 @@ using NZWalks.Api.Models.DomainModels;
 
 namespace NZWalks.Api.Data
 {
-    public class NZWalksDbContext : DbContext
+    public class NZWalksDbContext(DbContextOptions<NZWalksDbContext> dbContextOptions) : DbContext(dbContextOptions)
     {
-        public NZWalksDbContext(DbContextOptions<NZWalksDbContext> dbContextOptions) : base(dbContextOptions)
-        {
-
-        }
-
         public DbSet<Difficulty> difficulties { get; set; }
         public DbSet<Region> regions { get; set; }
         public DbSet<Walk> walks { get; set; }

@@ -13,15 +13,10 @@ using NZWalks.UI.Models.DTO;
 namespace NZWalks.UI.Controllers
 {
     [Route("regions")]
-    public class RegionsController : Controller
+    public class RegionsController(IHttpClientFactory httpClientFactory) : Controller
     {
         private readonly ILogger<RegionsController> _logger;
-        public IHttpClientFactory HttpClientFactory;
-
-        public RegionsController(IHttpClientFactory httpClientFactory)
-        {
-            this.HttpClientFactory = httpClientFactory;
-        }
+        public IHttpClientFactory HttpClientFactory = httpClientFactory;
 
         [HttpGet] // Matches GET requests to /regions
         public async Task<IActionResult> Index()

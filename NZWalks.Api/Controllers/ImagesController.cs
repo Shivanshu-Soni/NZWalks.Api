@@ -14,14 +14,10 @@ namespace NZWalks.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    public class ImagesController : ControllerBase
+    public class ImagesController(IImageRepository imageRepository) : ControllerBase
     {
-        private readonly IImageRepository imageRepository;
+        private readonly IImageRepository imageRepository = imageRepository;
 
-        public ImagesController(IImageRepository imageRepository)
-        {
-            this.imageRepository = imageRepository;
-        }
         //POST: /api/Images/Upload
         [HttpPost]
         [Route("Upload")]

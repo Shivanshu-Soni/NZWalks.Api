@@ -9,14 +9,9 @@ using NZWalks.Api.Models.DomainModels;
 
 namespace NZWalks.Api.Repository
 {
-    public class SQLRegionRepository : IRegionRepository
+    public class SQLRegionRepository(NZWalksDbContext nZWalksDbContext) : IRegionRepository
     {
-        private readonly NZWalksDbContext nZWalksDbContext;
-        public SQLRegionRepository(NZWalksDbContext nZWalksDbContext)
-        {
-            this.nZWalksDbContext = nZWalksDbContext;
-
-        }
+        private readonly NZWalksDbContext nZWalksDbContext = nZWalksDbContext;
 
         public async Task<Region> CreateAsync(Region region)
         {

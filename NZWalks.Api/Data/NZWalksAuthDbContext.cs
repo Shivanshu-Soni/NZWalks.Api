@@ -8,12 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NZWalks.Api.Data
 {
-    public class NZWalksAuthDbContext : IdentityDbContext
+    public class NZWalksAuthDbContext(DbContextOptions<NZWalksAuthDbContext> options) : IdentityDbContext(options)
     {
-        public NZWalksAuthDbContext(DbContextOptions<NZWalksAuthDbContext> options) : base(options)
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

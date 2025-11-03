@@ -13,16 +13,11 @@ namespace NZWalks.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class WalksController : ControllerBase
+    public class WalksController(IMapper mapper, IWalkRepository walkRepository) : ControllerBase
     {
-        private readonly IMapper mapper;
-        private readonly IWalkRepository walkRepository;
-        public WalksController(IMapper mapper, IWalkRepository walkRepository)
-        {
-            this.walkRepository = walkRepository;
-            this.mapper = mapper;
+        private readonly IMapper mapper = mapper;
+        private readonly IWalkRepository walkRepository = walkRepository;
 
-        }
         //create walk
         //post :/api/walks
         [HttpPost]
@@ -57,9 +52,6 @@ namespace NZWalks.Api.Controllers
 
             // Map the domain models to DTOs
             var walksDTO = mapper.Map<List<WalksDTO>>(walksDomainModel);
-
-            // create a dummy exception to test middleware
-            throw new Exception("This is a Exception");
 
             // Return the mapped list as an HTTP 200 response
             return Ok(walksDTO);
