@@ -18,14 +18,17 @@ namespace NZWalks.Api.Repository
         public string createJWTToken(IdentityUser user, List<string> roles)
         {
             //create claims
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            var claims = new List<Claim>
+            {
+                new(ClaimTypes.Email, user.Email ?? string.Empty)
+            };
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var jwtKey = configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is not configured.");
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
                 configuration["Jwt:Issuer"],

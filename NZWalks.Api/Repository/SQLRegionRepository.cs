@@ -25,11 +25,11 @@ namespace NZWalks.Api.Repository
         public async Task<Region?> DeleteAsync(Guid id)
         {
             var existingregion = await nZWalksDbContext.regions.FirstOrDefaultAsync(x => x.Id == id);
-            if (existingregion != null)
+            if (existingregion == null)
             {
                 return null;
             }
-             nZWalksDbContext.Remove(existingregion);
+            nZWalksDbContext.Remove(existingregion);
             await nZWalksDbContext.SaveChangesAsync();
             return existingregion;
         }
