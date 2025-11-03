@@ -38,31 +38,33 @@ namespace NZWalks.UI.Controllers
         }
 
         [HttpGet("add")] // Matches POST requests to /regions/add
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             return View();
         }
 
-          [HttpPost("add")] // Matches POST requests to /regions/add
+        [HttpPost("add")] // Matches POST requests to /regions/add
         public async Task<IActionResult> Add(AddRegionViewModel addRegionViewModel)
         {
             var client = HttpClientFactory.CreateClient();
-            var httpRequestMessage = new HttpRequestMessage(){
-                Method= HttpMethod.Post,
+            var httpRequestMessage = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
                 RequestUri = new Uri("http://localhost:5005/api/regions"),
                 Content = new StringContent(JsonSerializer.Serialize(addRegionViewModel), Encoding.UTF8, "application/json"),
 
             };
 
-            var httpResponseMessage = await  client.SendAsync(httpRequestMessage);
+            var httpResponseMessage = await client.SendAsync(httpRequestMessage);
             httpResponseMessage.EnsureSuccessStatusCode();
-           var response =  await httpResponseMessage.Content.ReadFromJsonAsync<RegionDTO>();
-           if(response != null){
-            return RedirectToAction("Index", "Region");
-           }
+            var response = await httpResponseMessage.Content.ReadFromJsonAsync<RegionDTO>();
+            if (response != null)
+            {
+                return RedirectToAction("Index", "Region");
+            }
 
             return View();
         }
-        
+
     }
 }

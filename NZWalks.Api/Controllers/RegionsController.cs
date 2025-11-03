@@ -118,13 +118,21 @@ namespace NZWalks.Api.Controllers
         [Authorize(Roles = "Writer")]
         public async Task<IActionResult> updateRegion([FromRoute] Guid Id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
+            if (updateRegionRequestDto == null)
+            {
+                return BadRequest("UpdateRegionRequestDto cannot be null.");
+            }
 
+            if (updateRegionRequestDto == null)
+            {
+                return BadRequest("UpdateRegionRequestDto cannot be null.");
+            }
 
             var regionDomainModel = new Region
             {
-                Code = updateRegionRequestDto.Code,
-                Name = updateRegionRequestDto.Name,
-                RegionImageUrl = updateRegionRequestDto.RegionImageUrl,
+                Code = updateRegionRequestDto.Code ?? string.Empty,
+                Name = updateRegionRequestDto.Name ?? string.Empty,
+                RegionImageUrl = updateRegionRequestDto.RegionImageUrl ?? string.Empty,
 
             };
 
