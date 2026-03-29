@@ -59,7 +59,7 @@ namespace NZWalks.Api.Controllers
                     if (userRole != null)
                     {
                         // create token
-                        var jwt = tokenRepository.createJWTToken(user, userRole.ToList());
+                        var jwt = tokenRepository.CreateJWTToken(user, userRole.ToList());
                         var response = new LoginResponseDto
                         {
                             JwtToken = jwt,
