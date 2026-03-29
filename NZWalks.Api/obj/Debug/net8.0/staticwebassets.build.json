@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "4Nud/txlo2YPNrKkNdBWK9C6UZEJurJ2R84qTcXGSf8=",
-  "Source": "NZWalks.Api",
-  "BasePath": "_content/NZWalks.Api",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"1in+4P3gdkQ6a1mKBpkOG3wngSFvdT9s6RbFe+ts4Nc=","Source":"NZWalks.Api","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

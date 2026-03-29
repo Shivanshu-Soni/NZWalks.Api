@@ -15,7 +15,7 @@ namespace NZWalks.Api.Repository
     {
         private readonly IConfiguration configuration = configuration;
 
-        public string createJWTToken(IdentityUser user, List<string> roles)
+        public string CreateJWTToken(IdentityUser user, List<string> roles)
         {
             //create claims
             var claims = new List<Claim>

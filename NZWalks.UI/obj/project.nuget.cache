@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "B1gV2gUD8iw=",
+  "dgSpecHash": "pM0K10GCXE4=",
   "success": true,
   "projectFilePath": "H:\\NZWalks.Api\\NZWalks.UI\\NZWalks.UI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.17\\microsoft.netcore.app.ref.8.0.17.nupkg.sha512",
-    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.17\\microsoft.windowsdesktop.app.ref.8.0.17.nupkg.sha512",
-    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.17\\microsoft.aspnetcore.app.ref.8.0.17.nupkg.sha512",
-    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.17\\microsoft.netcore.app.host.win-x64.8.0.17.nupkg.sha512"
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.25\\microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.25\\microsoft.windowsdesktop.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.25\\microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\shiva\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.25\\microsoft.netcore.app.host.win-x64.8.0.25.nupkg.sha512"
   ],
   "logs": []
 }
