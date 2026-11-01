@@ -1,70 +1,184 @@
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+using System.Net;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using NZWalks.UI.Models;
 using NZWalks.UI.Models.DTO;
 
-namespace NZWalks.UI.Controllers
+namespace NZWalks.UI.Controllers;
+
+[Route("regions")]
+public class RegionsController(IHttpClientFactory httpClientFactory, ILogger<RegionsController> logger)
+    : ApiControllerBase(httpClientFactory)
 {
-    [Route("regions")]
-    public class RegionsController(IHttpClientFactory httpClientFactory) : Controller
+    [HttpGet("")]
+    public async Task<IActionResult> Index()
     {
-        private readonly ILogger<RegionsController> _logger;
-        public IHttpClientFactory HttpClientFactory = httpClientFactory;
-
-        [HttpGet] // Matches GET requests to /regions
-        public async Task<IActionResult> Index()
+        try
         {
-            List<RegionDTO> response = new List<RegionDTO>();
-            try
+            using var response = await ApiClient.GetAsync("api/regions");
+            if (!response.IsSuccessStatusCode)
             {
-                var client = HttpClientFactory.CreateClient();
-                var httpResponseMessage = await client.GetAsync("http://localhost:5005/api/regions");
-                httpResponseMessage.EnsureSuccessStatusCode();
-                response.AddRange(await httpResponseMessage.Content.ReadFromJsonAsync<IEnumerable<RegionDTO>>());
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error fetching regions");
+                await SetApiErrorAsync(response, "Regions could not be loaded.");
+                return View(Array.Empty<RegionDTO>());
             }
 
-            return View(response);
+            var regions = await response.Content.ReadFromJsonAsync<List<RegionDTO>>();
+            return View(regions ?? []);
         }
-
-        [HttpGet("add")] // Matches POST requests to /regions/add
-        public IActionResult Add()
+        catch (HttpRequestException exception)
         {
-            return View();
+            logger.LogError(exception, "Could not connect to the NZWalks API while loading regions.");
+            TempData["Error"] = "Could not connect to the API. Start NZWalks.Api and try again.";
+            return View(Array.Empty<RegionDTO>());
         }
+    }
 
-        [HttpPost("add")] // Matches POST requests to /regions/add
-        public async Task<IActionResult> Add(AddRegionViewModel addRegionViewModel)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> Details(Guid id)
+    {
+        try
         {
-            var client = HttpClientFactory.CreateClient();
-            var httpRequestMessage = new HttpRequestMessage()
+            using var response = await ApiClient.GetAsync($"api/regions/{id}");
+            if (response.StatusCode == HttpStatusCode.NotFound)
             {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri("http://localhost:5005/api/regions"),
-                Content = new StringContent(JsonSerializer.Serialize(addRegionViewModel), Encoding.UTF8, "application/json"),
-
-            };
-
-            var httpResponseMessage = await client.SendAsync(httpRequestMessage);
-            httpResponseMessage.EnsureSuccessStatusCode();
-            var response = await httpResponseMessage.Content.ReadFromJsonAsync<RegionDTO>();
-            if (response != null)
-            {
-                return RedirectToAction("Index", "Region");
+                return NotFound();
             }
 
-            return View();
+            if (!response.IsSuccessStatusCode)
+            {
+                await SetApiErrorAsync(response, "Region details could not be loaded.");
+                return RedirectToAction(nameof(Index));
+            }
+
+            var region = await response.Content.ReadFromJsonAsync<RegionDTO>();
+            return region is null ? NotFound() : View(region);
+        }
+        catch (HttpRequestException exception)
+        {
+            logger.LogError(exception, "Could not connect to the NZWalks API while loading region {RegionId}.", id);
+            TempData["Error"] = "Could not connect to the API. Start NZWalks.Api and try again.";
+            return RedirectToAction(nameof(Index));
+        }
+    }
+
+    [HttpGet("add")]
+    public IActionResult Add() => View(new AddRegionViewModel());
+
+    [HttpPost("add")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Add(AddRegionViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
         }
 
+        try
+        {
+            using var response = await ApiClient.PostAsJsonAsync("api/regions", model);
+            if (!response.IsSuccessStatusCode)
+            {
+                await SetApiErrorAsync(response, "Region could not be created. A Writer account is required.");
+                return View(model);
+            }
+
+            TempData["Success"] = "Region added successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (HttpRequestException exception)
+        {
+            logger.LogError(exception, "Could not connect to the NZWalks API while creating a region.");
+            ModelState.AddModelError(string.Empty, "Could not connect to the API. Start NZWalks.Api and try again.");
+            return View(model);
+        }
+    }
+
+    [HttpGet("{id:guid}/edit")]
+    public async Task<IActionResult> Edit(Guid id)
+    {
+        try
+        {
+            using var response = await ApiClient.GetAsync($"api/regions/{id}");
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return NotFound();
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                await SetApiErrorAsync(response, "Region could not be loaded.");
+                return RedirectToAction(nameof(Index));
+            }
+
+            var region = await response.Content.ReadFromJsonAsync<RegionDTO>();
+            return region is null
+                ? NotFound()
+                : View(new AddRegionViewModel
+                {
+                    Code = region.Code,
+                    Name = region.Name,
+                    RegionImageUrl = region.RegionImageUrl
+                });
+        }
+        catch (HttpRequestException exception)
+        {
+            logger.LogError(exception, "Could not connect to the NZWalks API while loading region {RegionId}.", id);
+            TempData["Error"] = "Could not connect to the API. Start NZWalks.Api and try again.";
+            return RedirectToAction(nameof(Index));
+        }
+    }
+
+    [HttpPost("{id:guid}/edit")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(Guid id, AddRegionViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        try
+        {
+            using var response = await ApiClient.PutAsJsonAsync($"api/regions/{id}", model);
+            if (!response.IsSuccessStatusCode)
+            {
+                await SetApiErrorAsync(response, "Region could not be updated. A Writer account is required.");
+                return View(model);
+            }
+
+            TempData["Success"] = "Region updated successfully.";
+            return RedirectToAction(nameof(Details), new { id });
+        }
+        catch (HttpRequestException exception)
+        {
+            logger.LogError(exception, "Could not connect to the NZWalks API while updating region {RegionId}.", id);
+            ModelState.AddModelError(string.Empty, "Could not connect to the API. Start NZWalks.Api and try again.");
+            return View(model);
+        }
+    }
+
+    [HttpPost("{id:guid}/delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        try
+        {
+            using var response = await ApiClient.DeleteAsync($"api/regions/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                await SetApiErrorAsync(response, "Region could not be deleted. A Writer account is required.");
+            }
+            else
+            {
+                TempData["Success"] = "Region deleted successfully.";
+            }
+        }
+        catch (HttpRequestException exception)
+        {
+            logger.LogError(exception, "Could not connect to the NZWalks API while deleting region {RegionId}.", id);
+            TempData["Error"] = "Could not connect to the API. Start NZWalks.Api and try again.";
+        }
+
+        return RedirectToAction(nameof(Index));
     }
 }

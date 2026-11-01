@@ -1,6 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
-
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="page-hero page-hero-plain">
+    <div class="container">
+        <span class="eyebrow">THE IMPORTANT STUFF</span>
+        <h1>@ViewData["Title"]</h1>
+        <p>Your information belongs to you. Here's what this demo does with it.</p>
+    </div>
+</section>
+<section class="container content-narrow policy-copy">
+    <h2>Information you share</h2>
+    <p>When you create an account, sign in, or submit a walk or image, the information is sent to the NZWalks API configured for this application. The API and its database determine how long that information is retained.</p>
+    <h2>Your sign-in session</h2>
+    <p>After sign-in, a short-lived access token is kept in a server-side session. The browser receives an HTTP-only session cookie; your password is not stored by this website.</p>
+    <h2>Images and external services</h2>
+    <p>Uploaded images are handled by the configured API. The example landscape photos included with this site are sourced from Unsplash and stored locally with the site.</p>
+    <p class="policy-updated">This is an informational project page, not legal advice. Configure this notice to match your deployment before going live.</p>
+</section>
