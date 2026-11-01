@@ -1,0 +1,38 @@
+@model NZWalks.UI.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Sign in";
+}
+
+<section class="auth-page">
+    <div class="auth-image">
+        <img src="~/images/new-zealand-lake.jpg" alt="Mountain lake at golden hour" />
+        <div class="auth-image-copy"><span class="eyebrow eyebrow-light">THE TRAIL IS STILL THERE</span><h2>Pick up<br />where you <em>left off.</em></h2></div>
+    </div>
+    <div class="auth-panel">
+        <div class="auth-form">
+            <a class="back-link" asp-controller="Home" asp-action="Index">← Back home</a>
+            <span class="eyebrow">WELCOME BACK</span>
+            <h1>Good to have<br /><em>you back.</em></h1>
+            <p class="form-subtitle">Sign in to your NZ Walks account.</p>
+            <form asp-action="Login" method="post">
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+                <div class="form-field">
+                    <label asp-for="UserName">Email address</label>
+                    <input asp-for="UserName" class="form-control" placeholder="you@example.com" autocomplete="email" />
+                    <span asp-validation-for="UserName" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" class="form-control" placeholder="Your password" autocomplete="current-password" />
+                    <span asp-validation-for="Password" class="field-error"></span>
+                </div>
+                <button class="btn btn-forest btn-wide" type="submit">Sign in <span aria-hidden="true">↗</span></button>
+            </form>
+            <p class="auth-switch">New around here? <a asp-action="Register">Create an account</a></p>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

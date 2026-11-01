@@ -1,0 +1,30 @@
+@model NZWalks.UI.Models.WalkViewModel
+@{
+    ViewData["Title"] = "Add a walk";
+}
+
+<section class="form-page">
+    <div class="container form-layout">
+        <div class="form-aside">
+            <a class="back-link" asp-action="Index">← All walks</a>
+            <span class="eyebrow">PASS IT ON</span>
+            <h1>Good tracks<br />are <em>shared.</em></h1>
+            <p>Add a walk you love. Someone’s next favourite day might start right here.</p>
+            <img src="~/images/mountain-trail.jpg" alt="A trail beneath a mountain range" />
+        </div>
+        <div class="form-panel">
+            <h2>Add a walk</h2>
+            <p class="form-subtitle">Tell us what makes the track special.</p>
+            <form asp-action="Add" method="post">
+                <partial name="_WalkFields" model="Model" />
+                <div class="form-actions">
+                    <a class="btn btn-outline-forest" asp-action="Index">Cancel</a>
+                    <button class="btn btn-forest" type="submit">Add this walk <span aria-hidden="true">↗</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
