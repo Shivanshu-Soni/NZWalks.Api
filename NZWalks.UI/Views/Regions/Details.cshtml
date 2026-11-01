@@ -1,0 +1,26 @@
+@model NZWalks.UI.Models.DTO.RegionDTO
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="region-detail-hero" style="--region-image: url('@(string.IsNullOrWhiteSpace(Model.RegionImageUrl) ? Url.Content("~/images/new-zealand-lake.jpg") : Model.RegionImageUrl)')">
+    <div class="region-detail-shade"></div>
+    <div class="container region-detail-content">
+        <a class="back-link back-link-light" asp-action="Index">← All regions</a>
+        <span class="eyebrow eyebrow-light">@Model.Code · AOTEAROA</span>
+        <h1>@Model.Name</h1>
+        <p>A good place to begin. The rest is up to the track.</p>
+    </div>
+</section>
+<section class="container detail-actions">
+    <a class="text-link" asp-controller="Walks" asp-action="Index">Find a walk <span aria-hidden="true">↗</span></a>
+    @if (!string.IsNullOrWhiteSpace(Context.Session.GetString("UserName")))
+    {
+        <div class="inline-actions">
+            <a class="btn btn-outline-forest btn-sm" asp-action="Edit" asp-route-id="@Model.Id">Edit region</a>
+            <form asp-action="Delete" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Delete this region?');">
+                <button class="btn btn-danger-soft btn-sm" type="submit">Delete</button>
+            </form>
+        </div>
+    }
+</section>

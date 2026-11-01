@@ -1,0 +1,46 @@
+@model NZWalks.UI.Models.AddRegionViewModel
+@{
+    ViewData["Title"] = "Edit region";
+    var id = ViewContext.RouteData.Values["id"];
+}
+
+<section class="form-page">
+    <div class="container form-layout">
+        <div class="form-aside">
+            <a class="back-link" asp-action="Index">← All regions</a>
+            <span class="eyebrow">KEEP THE MAP TRUE</span>
+            <h1>Update this<br /><em>somewhere.</em></h1>
+            <p>Make sure the details are as good as the place itself.</p>
+            <img src="~/images/mountain-trail.jpg" alt="New Zealand mountain landscape" />
+        </div>
+        <div class="form-panel">
+            <h2>Edit @Model.Name</h2>
+            <p class="form-subtitle">Update this region’s details.</p>
+            <form asp-action="Edit" asp-route-id="@id" method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+                <div class="form-field">
+                    <label asp-for="Name">Region name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Code">Short code</label>
+                    <input asp-for="Code" class="form-control" maxlength="4" />
+                    <span asp-validation-for="Code" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="RegionImageUrl">Image URL <span class="optional-label">optional</span></label>
+                    <input asp-for="RegionImageUrl" class="form-control" />
+                    <span asp-validation-for="RegionImageUrl" class="field-error"></span>
+                </div>
+                <div class="form-actions">
+                    <a class="btn btn-outline-forest" asp-action="Index">Cancel</a>
+                    <button class="btn btn-forest" type="submit">Save changes <span aria-hidden="true">↗</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

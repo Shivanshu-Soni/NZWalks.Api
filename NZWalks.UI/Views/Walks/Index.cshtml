@@ -1,0 +1,70 @@
+@model IEnumerable<NZWalks.UI.Models.DTO.WalkDTO>
+@{
+    ViewData["Title"] = "Find a walk";
+}
+
+<section class="page-hero page-hero-green">
+    <div class="container page-hero-inner">
+        <div><span class="eyebrow eyebrow-light">THE NEXT GOOD DAY OUT</span><h1>Take the <em>long way.</em></h1></div>
+        <p>Little stroll or all-day mission—there’s a track with your name on it.</p>
+    </div>
+</section>
+
+<section class="container listing-section">
+    <div class="listing-toolbar walks-toolbar">
+        <div><span class="eyebrow">YOUR TRAILHEAD</span><h2>Find a walk <span class="count-pill">@Model.Count()</span></h2></div>
+        <a class="btn btn-forest" asp-action="Add">Add a walk <span aria-hidden="true">+</span></a>
+    </div>
+    <form class="walk-filters" asp-action="Index" method="get">
+        <label class="search-field">
+            <span class="visually-hidden">Search walks</span>
+            <span aria-hidden="true">⌕</span>
+            <input name="search" value="@ViewBag.Search" placeholder="Search by walk name…" />
+        </label>
+        <label class="sort-field">
+            <span class="visually-hidden">Sort walks</span>
+            <select name="sortBy">
+                <option value="">Sort by</option>
+                <option value="Name" selected="@(ViewBag.SortBy?.ToString() == "Name")">Name</option>
+                <option value="Length" selected="@(ViewBag.SortBy?.ToString() == "Length")">Distance</option>
+            </select>
+        </label>
+        <label class="sort-direction"><input type="checkbox" name="descending" value="true" checked="@(ViewBag.Descending is true)" /> Descending</label>
+        <button class="btn btn-outline-forest" type="submit">Find walks</button>
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Search as string) || !string.IsNullOrWhiteSpace(ViewBag.SortBy as string))
+        {
+            <a class="clear-filters" asp-action="Index">Clear</a>
+        }
+    </form>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">↟</span>
+            <h3>No tracks found.</h3>
+            <p>Try another search—or check that the API is up and running.</p>
+            <a class="text-link" asp-action="Add">Add the first walk <span aria-hidden="true">↗</span></a>
+        </div>
+    }
+    else
+    {
+        <div class="walk-grid">
+            @foreach (var walk in Model)
+            {
+                var image = string.IsNullOrWhiteSpace(walk.WalkImageUrl) ? Url.Content("~/images/mountain-trail.jpg") : walk.WalkImageUrl;
+                <article class="walk-card">
+                    <a class="walk-card-image" asp-action="Details" asp-route-id="@walk.Id">
+                        <img src="@image" alt="@walk.Name scenery" loading="lazy" />
+                        <span class="difficulty-badge">@walk.Difficulty?.Name</span>
+                    </a>
+                    <div class="walk-card-content">
+                        <span class="eyebrow">@(walk.Region?.Name ?? "NEW ZEALAND")</span>
+                        <h3><a asp-action="Details" asp-route-id="@walk.Id">@walk.Name</a></h3>
+                        <p>@(walk.Description.Length > 112 ? $"{walk.Description[..112]}…" : walk.Description)</p>
+                        <div class="walk-card-meta"><span>↟ @walk.LenghtInkm.ToString("0.#") km</span><a asp-action="Details" asp-route-id="@walk.Id">The details <span aria-hidden="true">↗</span></a></div>
+                    </div>
+                </article>
+            }
+        </div>
+    }
+</section>

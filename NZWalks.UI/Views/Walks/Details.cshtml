@@ -1,0 +1,43 @@
+@model NZWalks.UI.Models.DTO.WalkDTO
+@{
+    ViewData["Title"] = Model.Name;
+    var image = string.IsNullOrWhiteSpace(Model.WalkImageUrl) ? Url.Content("~/images/mountain-trail.jpg") : Model.WalkImageUrl;
+}
+
+<section class="walk-detail-hero" style="--walk-image: url('@image')">
+    <div class="walk-detail-shade"></div>
+    <div class="container walk-detail-content">
+        <a class="back-link back-link-light" asp-action="Index">← All walks</a>
+        <span class="eyebrow eyebrow-light">@(Model.Region?.Name ?? "AOTEAROA, NEW ZEALAND")</span>
+        <h1>@Model.Name</h1>
+        <div class="walk-detail-stats">
+            <span><strong>↟ @Model.LenghtInkm.ToString("0.#")</strong> kilometres</span>
+            <span><strong>@(Model.Difficulty?.Name ?? "All levels")</strong> difficulty</span>
+        </div>
+    </div>
+</section>
+<section class="container walk-detail-body">
+    <div class="walk-description">
+        <span class="eyebrow">THE GOOD BIT</span>
+        <h2>A little more <em>about the track.</em></h2>
+        <p>@Model.Description</p>
+        @if (Model.Region is not null)
+        {
+            <a class="text-link" asp-controller="Regions" asp-action="Details" asp-route-id="@Model.Region.Id">Explore @Model.Region.Name <span aria-hidden="true">↗</span></a>
+        }
+    </div>
+    <aside class="walk-side-card">
+        <span class="eyebrow">READY WHEN YOU ARE</span>
+        <h3>Pack a little water. Leave room for the view.</h3>
+        <a class="btn btn-forest" asp-action="Index">Find another walk</a>
+    </aside>
+</section>
+<section class="container detail-actions">
+    <a class="text-link" asp-action="Index">← Back to all walks</a>
+    <div class="inline-actions">
+        <a class="btn btn-outline-forest btn-sm" asp-action="Edit" asp-route-id="@Model.Id">Edit walk</a>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Delete this walk?');">
+            <button class="btn btn-danger-soft btn-sm" type="submit">Delete</button>
+        </form>
+    </div>
+</section>

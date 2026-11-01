@@ -1,50 +1,75 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var signedInUser = Context.Session.GetString("UserName");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NZWalks.UI</title>
+    <meta name="theme-color" content="#153a32" />
+    <meta name="description" content="Find your next unforgettable walk in Aotearoa New Zealand." />
+    <title>@ViewData["Title"] · NZ Walks</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NZWalks.UI.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NZWalks.UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg navbar-light site-nav">
+            <div class="container">
+                <a class="navbar-brand brand-mark" asp-controller="Home" asp-action="Index" aria-label="NZ Walks home">
+                    <span class="brand-icon" aria-hidden="true">⌁</span>
+                    <span>nz<span class="brand-accent">walks</span></span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation"
+                        aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Regions" asp-action="Index">Regions</a>
-                        </li>
-                           <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Walks" asp-action="Index">Walks</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="mainNavigation">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link @(currentController == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">Discover</a></li>
+                        <li class="nav-item"><a class="nav-link @(currentController == "Walks" ? "active" : "")" asp-controller="Walks" asp-action="Index">Walks</a></li>
+                        <li class="nav-item"><a class="nav-link @(currentController == "Regions" ? "active" : "")" asp-controller="Regions" asp-action="Index">Regions</a></li>
+                        <li class="nav-item"><a class="nav-link @(currentController == "Images" ? "active" : "")" asp-controller="Images" asp-action="Upload">Share a photo</a></li>
                     </ul>
+                    <div class="nav-account">
+                        @if (string.IsNullOrWhiteSpace(signedInUser))
+                        {
+                            <a class="nav-link sign-in-link" asp-controller="Account" asp-action="Login">Sign in</a>
+                            <a class="btn btn-forest btn-sm" asp-controller="Account" asp-action="Register">Join the trail <span aria-hidden="true">↗</span></a>
+                        }
+                        else
+                        {
+                            <span class="signed-in-label">Hi, @signedInUser.Split('@')[0]</span>
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+                                <button class="btn btn-outline-forest btn-sm" type="submit">Sign out</button>
+                            </form>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+    <main role="main">
         <div class="container">
-            &copy; 2024 - NZWalks.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            @if (TempData["Success"] is string successMessage)
+            {
+                <div class="alert alert-success site-alert" role="status">@successMessage</div>
+            }
+            @if (TempData["Error"] is string errorMessage)
+            {
+                <div class="alert alert-warning site-alert" role="alert">@errorMessage</div>
+            }
+        </div>
+            @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand-mark footer-brand" asp-controller="Home" asp-action="Index"><span class="brand-icon" aria-hidden="true">⌁</span><span>nz<span class="brand-accent">walks</span></span></a>
+            <p>Made for the long way round. <span>© @DateTime.UtcNow.Year NZ Walks</span></p>
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

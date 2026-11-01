@@ -1,27 +1,47 @@
 @model NZWalks.UI.Models.AddRegionViewModel
 @{
-
+    ViewData["Title"] = "Add a region";
 }
 
-<h1>Add Region</h1>
-<form action="" method="post">
-    <div class="mt-3">
-        <label for="" class="form-label">Code:</label>
-        <input type="text" name="Code" id="inpcode" class="form-control" asp-for="Code">
+<section class="form-page">
+    <div class="container form-layout">
+        <div class="form-aside">
+            <a class="back-link" asp-action="Index">← All regions</a>
+            <span class="eyebrow">GROW THE MAP</span>
+            <h1>Somewhere<br /><em>new.</em></h1>
+            <p>Know a corner of Aotearoa that belongs on the map? Add it here.</p>
+            <img src="~/images/alpine-lake.jpg" alt="Open mountain country" />
+        </div>
+        <div class="form-panel">
+            <h2>Add a region</h2>
+            <p class="form-subtitle">A few details and it’s on the map.</p>
+            <form asp-action="Add" method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+                <div class="form-field">
+                    <label asp-for="Name">Region name</label>
+                    <input asp-for="Name" class="form-control" placeholder="e.g. Fiordland" autocomplete="off" />
+                    <span asp-validation-for="Name" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Code">Short code</label>
+                    <input asp-for="Code" class="form-control" placeholder="e.g. FIO" maxlength="4" />
+                    <span class="field-hint">3–4 letters</span>
+                    <span asp-validation-for="Code" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="RegionImageUrl">Image URL <span class="optional-label">optional</span></label>
+                    <input asp-for="RegionImageUrl" class="form-control" placeholder="https://…" />
+                    <span asp-validation-for="RegionImageUrl" class="field-error"></span>
+                </div>
+                <div class="form-actions">
+                    <a class="btn btn-outline-forest" asp-action="Index">Cancel</a>
+                    <button class="btn btn-forest" type="submit">Add region <span aria-hidden="true">↗</span></button>
+                </div>
+                <p class="form-footnote">Adding or changing regions requires a Writer account.</p>
+            </form>
+        </div>
     </div>
-    <div class="mt-3">
-        <label for="" class="form-label">Name:</label>
-        <input type="text" name="Name" id="inpName" class="form-control" asp-for="Name">
-    </div>
-    <div class="mt-3">
-        <label for="" class="form-label">ImageUrl:</label>
-        <input type="text" name="Image" id="inpImage" class="form-control" asp-for="RegionImageUrl">
-    </div>
-
-    <div class="mt-3">
-        <button class="btn btn-secondary" type="submit">
-            Submit
-        </button>
-
-    </div>
-</form>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
