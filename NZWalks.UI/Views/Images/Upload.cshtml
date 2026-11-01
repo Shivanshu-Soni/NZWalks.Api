@@ -1,0 +1,50 @@
+@model NZWalks.UI.Models.ImageUploadViewModel
+@{
+    ViewData["Title"] = "Share a photo";
+}
+
+<section class="page-hero page-hero-green">
+    <div class="container page-hero-inner">
+        <div><span class="eyebrow eyebrow-light">A DIFFERENT KIND OF POSTCARD</span><h1>Bring the view <em>back.</em></h1></div>
+        <p>Share a little piece of the trail. Keep it JPG, JPEG, or PNG and under 10 MB.</p>
+    </div>
+</section>
+<section class="container upload-layout">
+    <div class="upload-intro">
+        <span class="eyebrow">SHARED FROM THE TRACK</span>
+        <h2>Good views<br /><em>travel well.</em></h2>
+        <p>Upload an image from your walk and add a name so it’s easy to find later.</p>
+        <img src="~/images/alpine-lake.jpg" alt="Mountain scenery around a still lake" />
+    </div>
+    <div class="form-panel upload-panel">
+        <h2>Upload a photo</h2>
+        <p class="form-subtitle">A little view from out there.</p>
+        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            <div class="form-field">
+                <label asp-for="File">Choose an image</label>
+                <input asp-for="File" class="form-control file-input" accept=".jpg,.jpeg,.png,image/jpeg,image/png" />
+                <span asp-validation-for="File" class="field-error"></span>
+            </div>
+            <div class="form-field">
+                <label asp-for="FileName">Image name</label>
+                <input asp-for="FileName" class="form-control" placeholder="e.g. Sunrise at the summit" />
+                <span asp-validation-for="FileName" class="field-error"></span>
+            </div>
+            <div class="form-field">
+                <label asp-for="FileDescription">Caption <span class="optional-label">optional</span></label>
+                <textarea asp-for="FileDescription" class="form-control" rows="3" placeholder="Where was this taken?"></textarea>
+                <span asp-validation-for="FileDescription" class="field-error"></span>
+            </div>
+            <button class="btn btn-forest" type="submit">Upload photo <span aria-hidden="true">↗</span></button>
+            <p class="form-footnote">JPG, JPEG, or PNG · max 10 MB</p>
+        </form>
+        @if (ViewBag.ImagePath is string imagePath)
+        {
+            <div class="upload-success"><img src="@imagePath" alt="Your uploaded image" /><a href="@imagePath" target="_blank" rel="noopener">View uploaded image ↗</a></div>
+        }
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

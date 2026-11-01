@@ -2,8 +2,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//created a httpclient objec t
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("NZWalksApi", client =>
+{
+    var apiBaseUrl = builder.Configuration["Api:BaseUrl"]
+        ?? throw new InvalidOperationException("Api:BaseUrl is not configured.");
+    client.BaseAddress = new Uri(apiBaseUrl);
+});
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +30,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,8 +1,73 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Find your wild";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero-section">
+    <div class="hero-image" role="img" aria-label="A quiet alpine lake surrounded by New Zealand mountains"></div>
+    <div class="hero-shade"></div>
+    <div class="container hero-content">
+        <span class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> AOTEAROA, NEW ZEALAND</span>
+        <h1>The best stories<br />start <em>out there.</em></h1>
+        <p>Find your next favourite track. From misty mountain passes to coastlines that go on forever.</p>
+        <div class="hero-actions">
+            <a class="btn btn-lime" asp-controller="Walks" asp-action="Index">Explore the walks <span aria-hidden="true">↗</span></a>
+            <a class="hero-text-link" asp-controller="Regions" asp-action="Index">Explore by region <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-note"><span class="hero-note-line"></span> A little further is always worth it.</div>
+    </div>
+    <div class="hero-index"><span>01</span> / 03</div>
+</section>
+
+<section class="intro-section section-pad">
+    <div class="container intro-grid">
+        <div>
+            <span class="eyebrow">YOUR NEXT OUTSIDE</span>
+            <h2>Big country.<br /><em>Small moments.</em></h2>
+        </div>
+        <div class="intro-copy">
+            <p>New Zealand is best experienced one footstep at a time. Find tracks worth waking up for, places worth slowing down in, and a little more room to breathe.</p>
+            <a class="text-link" asp-controller="Regions" asp-action="Index">Meet the regions <span aria-hidden="true">↗</span></a>
+        </div>
+    </div>
+</section>
+
+<section class="feature-section section-pad">
+    <div class="container">
+        <div class="section-heading">
+            <div><span class="eyebrow">PICK YOUR PACE</span><h2>Out there is <em>calling.</em></h2></div>
+            <a class="text-link" asp-controller="Walks" asp-action="Index">All walks <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="feature-grid">
+            <a class="feature-card feature-card-large" asp-controller="Walks" asp-action="Index">
+                <img src="~/images/mountain-trail.jpg" alt="Dramatic snow-capped alpine peaks" />
+                <span class="feature-card-shade"></span>
+                <span class="feature-card-content"><span class="feature-tag">THE HIGH COUNTRY</span><strong>Find your<br />high point.</strong><span class="feature-arrow">↗</span></span>
+            </a>
+            <a class="feature-card feature-card-small" asp-controller="Regions" asp-action="Index">
+                <img src="~/images/alpine-lake.jpg" alt="A wide open landscape beneath a big sky" />
+                <span class="feature-card-shade"></span>
+                <span class="feature-card-content"><span class="feature-tag">TAKE THE SCENIC ROUTE</span><strong>Good things<br />take the long way.</strong><span class="feature-arrow">↗</span></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="numbers-section">
+    <div class="container numbers-inner">
+        <div class="numbers-copy"><span class="eyebrow eyebrow-light">THE TRAILHEAD</span><h2>Made for going<br /><em>somewhere.</em></h2></div>
+        <div class="number-stat"><strong>@(ViewBag.WalkCount?.ToString() ?? "—")</strong><span>ways to get out there</span></div>
+        <div class="number-stat"><strong>@(ViewBag.RegionCount?.ToString() ?? "—")</strong><span>corners of Aotearoa</span></div>
+        @if (ViewBag.ApiUnavailable is true)
+        {
+            <p class="api-note">Live trail counts appear when the NZWalks API is running.</p>
+        }
+    </div>
+</section>
+
+<section class="closing-cta">
+    <div class="container closing-inner">
+        <span class="eyebrow">YOUR NEXT CHAPTER IS OUTSIDE</span>
+        <h2>Take the <em>long way.</em></h2>
+        <a class="btn btn-forest" asp-controller="Walks" asp-action="Index">Find a walk <span aria-hidden="true">↗</span></a>
+    </div>
+</section>

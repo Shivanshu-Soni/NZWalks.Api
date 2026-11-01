@@ -1,0 +1,42 @@
+@model NZWalks.UI.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Join NZ Walks";
+}
+
+<section class="auth-page">
+    <div class="auth-image">
+        <img src="~/images/mountain-trail.jpg" alt="A dramatic mountain range" />
+        <div class="auth-image-copy"><span class="eyebrow eyebrow-light">AOTEAROA IS WAITING</span><h2>Your outside<br />starts <em>here.</em></h2></div>
+    </div>
+    <div class="auth-panel">
+        <div class="auth-form">
+            <a class="back-link" asp-controller="Home" asp-action="Index">← Back home</a>
+            <span class="eyebrow">JOIN THE TRAIL</span>
+            <h1>Make room<br />for <em>outside.</em></h1>
+            <p class="form-subtitle">Create a reader account to explore the walks.</p>
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+                <div class="form-field">
+                    <label asp-for="UserName">Email address</label>
+                    <input asp-for="UserName" class="form-control" placeholder="you@example.com" autocomplete="email" />
+                    <span asp-validation-for="UserName" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" class="form-control" placeholder="At least 6 characters" autocomplete="new-password" />
+                    <span asp-validation-for="Password" class="field-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="ConfirmPassword">Confirm password</label>
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Type it once more" autocomplete="new-password" />
+                    <span asp-validation-for="ConfirmPassword" class="field-error"></span>
+                </div>
+                <button class="btn btn-forest btn-wide" type="submit">Create account <span aria-hidden="true">↗</span></button>
+            </form>
+            <p class="auth-switch">Already have an account? <a asp-action="Login">Sign in</a></p>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
