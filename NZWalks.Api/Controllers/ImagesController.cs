@@ -46,7 +46,7 @@ namespace NZWalks.Api.Controllers
 
         private void ValidateFileUpload(ImageUploadRequestDto requestDto)
         {
-            var allowedExtension = new string[] { ".jpg", ".jpeg", ".ong", };
+            var allowedExtension = new string[] { ".jpg", ".jpeg", ".png" };
             if (!allowedExtension.Contains(Path.GetExtension(requestDto.File.FileName)))
             {
                 ModelState.AddModelError("file", "unsupported file Extension");
@@ -61,4 +61,3 @@ namespace NZWalks.Api.Controllers
 
 
 }
-

@@ -40,10 +40,9 @@ namespace NZWalks.Api.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Region?> GetByIdAsync(int id)
+        public Task<Region?> GetByIdAsync(Guid id)
         {
-            return nZWalksDbContext.regions.FirstOrDefaultAsync() ?? throw new NotImplementedException();
-            throw new NotImplementedException();
+            return nZWalksDbContext.regions.FirstOrDefaultAsync(region => region.Id == id);
         }
 
         public async Task<Region?> UpdateAsync(Guid id, Region region)

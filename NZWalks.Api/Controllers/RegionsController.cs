@@ -54,9 +54,9 @@ namespace NZWalks.Api.Controllers
         // get single region
         //GET:https://localhost:portnumber/api/regions/{id}
         [HttpGet]
-        [Route("id")]
+        [Route("{id:Guid}")]
         [Authorize(Roles = "Reader")]
-        public async Task<IActionResult> GetRegionById([FromRoute] int id)
+        public async Task<IActionResult> GetRegionById([FromRoute] Guid id)
         {
             // find applied only to primary key
             //var region =  await _dbContext.regions.Find(id);
@@ -118,11 +118,6 @@ namespace NZWalks.Api.Controllers
         [Authorize(Roles = "Writer")]
         public async Task<IActionResult> updateRegion([FromRoute] Guid Id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
-            if (updateRegionRequestDto == null)
-            {
-                return BadRequest("UpdateRegionRequestDto cannot be null.");
-            }
-
             if (updateRegionRequestDto == null)
             {
                 return BadRequest("UpdateRegionRequestDto cannot be null.");

@@ -8,6 +8,7 @@ namespace NZWalks.Api.Models.DTO
 {
     public class WalksDTO
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double LenghtInkm { get; set; }
